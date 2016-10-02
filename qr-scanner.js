@@ -1,9 +1,4 @@
-if (require){		
-    if (!angular) var angular = require('angular');		
-    if (!qrcode) var qrcode = require('jsqrcode');		
-}
- 
- (function() {
+(function() {
 'use strict';
 
 angular.module('qrScanner', ["ng"]).directive('qrScanner', ['$interval', '$window', function($interval, $window) {
