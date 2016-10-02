@@ -56,8 +56,11 @@ angular.module('qrScanner', ["ng"]).directive('qrScanner', ['$interval', '$windo
 
       var videoOpts = true;
       if (scope.ngVideoSource) {
+          console.log('scope.ngVideoSource', scope.ngVideoSource);
           videoOpts = {
-              sourceId: scope.ngVideoSource
+              optional: [{
+                  sourceId: scope.ngVideoSource
+              }]
           };
       }
 
