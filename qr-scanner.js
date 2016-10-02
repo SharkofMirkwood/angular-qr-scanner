@@ -37,7 +37,7 @@ angular.module('qrScanner', ["ng"]).directive('qrScanner', ['$interval', '$windo
         if ($window.localMediaStream) {
           context.drawImage(video, 0, 0, 307,250);
           try {
-            qrcode.decode(canvas);
+            qrcode.decode();
           } catch(e) {
             scope.ngError({error: e});
           }
@@ -52,8 +52,6 @@ angular.module('qrScanner', ["ng"]).directive('qrScanner', ['$interval', '$windo
         video.play();
         stopScan = $interval(scan, 500);
       };
-
-      console.log('TEST QRCODE: ', qrcode);
 
       // Call the getUserMedia method with our callback functions
       if (navigator.mediaDevices.getUserMedia) {
