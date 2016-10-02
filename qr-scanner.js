@@ -1,8 +1,3 @@
-if (require){		
-    if (!angular) var angular = require('angular');		
-    if (!qrcode) var qrcode = require('jsqrcode');		
-}
- 
  (function() {
 'use strict';
 
@@ -42,7 +37,7 @@ angular.module('qrScanner', ["ng"]).directive('qrScanner', ['$interval', '$windo
         if ($window.localMediaStream) {
           context.drawImage(video, 0, 0, 307,250);
           try {
-            qrcode.decode();
+            qrcode.decode(canvas);
           } catch(e) {
             scope.ngError({error: e});
           }
@@ -58,6 +53,8 @@ angular.module('qrScanner', ["ng"]).directive('qrScanner', ['$interval', '$windo
         stopScan = $interval(scan, 500);
       };
 
+      console.log('TEST QRCODE: ', qrcode);
+
       // Call the getUserMedia method with our callback functions
       if (navigator.mediaDevices.getUserMedia) {
         console.log('Using navigator.mediaDevices.getUserMedia');
@@ -68,7 +65,7 @@ angular.module('qrScanner', ["ng"]).directive('qrScanner', ['$interval', '$windo
             });
       } else if(navigator.getUserMedia) {
         console.log('Using navigator.getUserMedia');
-        navigator.getUserMedia({video: true}, successCallback, function(e) {
+        navigator.getUserMedia({video: {facingMode: 'environment'}}, successCallback, function(e) {
           scope.ngVideoError({error: e});
         });
       } else {
